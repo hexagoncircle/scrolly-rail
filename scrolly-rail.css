@@ -3,7 +3,6 @@ scrolly-rail {
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
-  max-inline-size: 100%;
 }
 
 scrolly-rail > * {
