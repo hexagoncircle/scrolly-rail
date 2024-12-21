@@ -6,7 +6,7 @@ A horizontal snap scroller Web Component that targets previous/next control elem
 
 ## Introduction
 
-🚧 This is an opinionated experimental concept that explores a horizontal scroll pattern where:
+🚧 This is an opinionated experimental concept exploring horizontal scroll patterns with control enhancements.
 
 - Base styles from `scrolly-rail.css` establish the horizontal scrolling and layout of this component and its children. If JavaScript were disabled, the rail can still be scrolled and snap items into place as expected.
 - The `scrolly-rail.js` script provides enhancements to the custom element if previous/next `button` control elements have been created and targeted using the available attributes (read more below).
