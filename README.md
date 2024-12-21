@@ -5,7 +5,7 @@ A custom element horizontal snap scroller in two parts:
 1. Foundational CSS for layout, scroll, and snap styles.
 2. Web Component script adds the ability to scroll previous or next set of items into view by connecting to `button` control elements.
 
-Check out the [demo on CodePen](https://codepen.io/hexagoncircle/full/yyBMGrL) 👀
+Check out the [demo on CodePen](https://codepen.io/hexagoncircle/full/yyBMGrL) or run the demo locally with `npm start`.
 
 🚧 This is an opinionated experimental concept exploring horizontal scroll patterns with control enhancements.
 
