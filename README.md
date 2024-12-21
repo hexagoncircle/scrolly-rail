@@ -16,6 +16,15 @@ A horizontal snap scroller Web Component that targets previous/next control elem
 
 ## Usage
 
+- Add the `scrolly-rail.css` so that default styles are applied by importing or copying the styles into your project.
+- Add the `scrolly-rail.js` in your HTML template.
+
+```html
+<script type="module" src="scrolly-rail.js"></script>
+```
+
+Add the custom element with a collection of items. It expects the collection to be a container with child items, ideally a `ul` or `ol` element containing `li` elements.
+
 ```html
 <scrolly-rail data-control-previous="btn-previous" data-control-next="btn-next">
   <ul>
