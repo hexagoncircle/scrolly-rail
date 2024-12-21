@@ -1,10 +1,11 @@
 # scrolly-rail
 
-A horizontal snap scroller Web Component that targets previous/next control elements enhancements.
+A horizontal snap scroller custom element in two parts:
 
-- [CodePen demo](https://codepen.io/hexagoncircle/full/yyBMGrL)
+1. Foundational CSS for layout, scroll, and snap styles.
+2. Web Component script adds the ability to scroll previous or next set of items into view by connecting to `button` control elements.
 
-## Introduction
+Check out the [demo on CodePen](https://codepen.io/hexagoncircle/full/yyBMGrL) 👀
 
 🚧 This is an opinionated experimental concept exploring horizontal scroll patterns with control enhancements.
 
