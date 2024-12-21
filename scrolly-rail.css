@@ -1,0 +1,21 @@
+scrolly-rail {
+  display: flex;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  max-inline-size: 100%;
+}
+
+scrolly-rail > * {
+  display: flex;
+}
+
+scrolly-rail > * > * {
+  scroll-snap-align: start;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  scrolly-rail {
+    scroll-behavior: smooth;
+  }
+}

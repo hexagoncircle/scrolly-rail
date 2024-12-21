@@ -1,0 +1,310 @@
+@layer base, patterns, components, utils;
+
+@import "scrolly-rail.css" layer(components);
+
+@layer base {
+  :root {
+    --text-1: #0f172a;
+    --text-2: #64748b;
+    --surface-1: #ffffff;
+    --surface-2: #f8fafc;
+    --surface-3: #f1f5f9;
+    --surface-4: #cbd5e1;
+    --surface-5: #64748b;
+    --surface-translucent: hsla(210 40% 98% / 0.8);
+
+    --border-color: var(--surface-5);
+    --border-color-subtle: var(--surface-4);
+    --border-color-highlight: var(--surface-3);
+    --scrollbar-color: var(--text-2) var(--surface-3);
+
+    --space-xs: 0.25rem;
+    --space-s: 0.5rem;
+    --space-m: 1rem;
+    --space-l: 2rem;
+    --space-xl: 3rem;
+
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    display: grid;
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    color: var(--text-1);
+    background-color: var(--surface-2);
+  }
+
+  :where(ul, ol)[role="list"] {
+    list-style: none;
+    padding-inline-start: unset;
+  }
+}
+
+@layer utils {
+  .visually-hidden {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+}
+
+@layer patterns {
+  .layout-stack > * + * {
+    margin-block-start: var(--stack-space, 1rem);
+  }
+
+  .layout-layer {
+    display: grid;
+    grid-template-areas: "box";
+
+    > * {
+      grid-area: box;
+    }
+  }
+}
+
+@layer components {
+  .icon {
+    --_size: var(--icon-size, 1em);
+    width: var(--_size);
+    height: var(--_size);
+  }
+
+  /* Custom scrolly-rail styles */
+  scrolly-rail {
+    --_block-gutter: var(--space-m);
+    --_inline-gutter: var(--space-l);
+
+    scroll-padding-inline-start: var(--_inline-gutter);
+    scrollbar-color: var(--scrollbar-color);
+    padding-inline: var(--_inline-gutter);
+    padding-block: var(--_block-gutter);
+    margin-block: calc(var(--_block-gutter) * -1);
+  }
+
+  .btn-scrolly-rail {
+    --icon-size: 1.25rem;
+    --x-offset-direction: 1;
+    --_size: calc(var(--icon-size, 1rem) * 2);
+    --_x-offset: calc(6px * var(--x-offset-direction));
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    place-content: center;
+    inline-size: var(--_size);
+    block-size: var(--_size);
+    border-radius: 50%;
+    color: var(--border-color);
+    border: 1px solid currentcolor;
+    background: var(--surface-translucent);
+    backdrop-filter: blur(2px);
+    box-shadow: hsla(0 0% 0% / 0.1) 0 4px 8px -3px;
+    cursor: pointer;
+    touch-action: manipulation;
+
+    .icon {
+      transition: translate 300ms var(--ease-out-back);
+    }
+
+    &:not([data-bound]):active .icon {
+      translate: calc(-10% * var(--x-offset-direction)) 0;
+    }
+  }
+
+  .btn-scrolly-rail[class*="animate"] {
+    transition: 225ms var(--ease-out-quart);
+  }
+
+  .btn-scrolly-rail.animate-fade {
+    transition-property: border-color, color, box-shadow;
+
+    &[data-bound] {
+      color: var(--surface-4);
+      box-shadow: none;
+    }
+  }
+
+  .btn-scrolly-rail.animate-appearance {
+    transition-property: display, opacity, translate, scale;
+    transition-behavior: allow-discrete;
+
+    &[data-bound] {
+      display: none;
+      opacity: 0;
+      scale: 0.5;
+    }
+
+    @starting-style {
+      opacity: 0;
+      translate: var(--_x-offset) 0;
+
+      .icon {
+        translate: calc(100% * var(--x-offset-direction)) 0;
+      }
+    }
+  }
+
+  x-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    background: linear-gradient(var(--surface-1), var(--surface-1)) padding-box,
+      linear-gradient(
+          135deg,
+          var(--border-color-subtle),
+          var(--border-color-highlight) 40% 60%,
+          var(--border-color-subtle)
+        )
+        border-box;
+    border: 1px solid transparent;
+    box-shadow: hsla(0 0% 0% / 0.06) 0 4px 6px -3px;
+    border-radius: 0.65rem;
+
+    &:focus-within {
+      outline: 5px auto Highlight;
+      outline: 5px auto -webkit-focus-ring-color;
+    }
+
+    .content {
+      display: grid;
+      gap: 0.4rem;
+    }
+
+    h2 {
+      grid-row: 1;
+      margin: 0;
+      font-size: 1.2em;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+
+      a {
+        color: currentcolor;
+        text-decoration: none;
+        outline: none;
+      }
+    }
+
+    figure {
+      overflow: hidden;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      inline-size: 4rem;
+      margin: 0;
+      background: var(--border-color-highlight);
+      border: 1px solid var(--border-color-subtle);
+    }
+
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(8rem, 100%), 1fr));
+      justify-items: start;
+      gap: 0.4rem;
+      line-height: 1.2;
+
+      .role {
+        grid-column: 1 / -1;
+      }
+
+      dt {
+        font-size: 0.8em;
+        margin-block-end: 0.125em;
+        color: var(--text-2);
+      }
+    }
+  }
+}
+
+main {
+  --stack-space: var(--space-xl);
+  margin-block: auto;
+  padding-block: var(--space-xl) var(--space-m);
+}
+
+.collection-list > li {
+  display: grid;
+}
+
+#collection-1 {
+  --control-margin-offset: var(--space-s);
+
+  x-card {
+    inline-size: clamp(20rem, 1rem + 50vw, 25rem);
+  }
+
+  .collection-list {
+    gap: var(--space-s);
+  }
+
+  .btn-scrolly-rail--previous {
+    place-self: center start;
+    margin-inline-start: var(--control-margin-offset);
+  }
+
+  .btn-scrolly-rail--next {
+    --x-offset-direction: -1;
+    place-self: center end;
+    margin-inline-end: var(--control-margin-offset);
+  }
+}
+
+#collection-2 {
+  position: relative;
+  inline-size: min(50rem, 100% - var(--space-l) * 2);
+  margin-inline: auto;
+
+  .scrolly-rail-wrapper {
+    display: grid;
+    padding-block: var(--space-m);
+    border-inline: 1px dashed var(--border-color);
+  }
+
+  .collection-list {
+    gap: var(--space-m);
+  }
+
+  .placeholder-item {
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    inline-size: 8rem;
+    aspect-ratio: 4 / 5;
+    border: 1px solid var(--border-color);
+    border-radius: 0.4rem;
+  }
+
+  .scrolly-rail-controls {
+    --stack-space: var(--space-s);
+    display: flex;
+    gap: var(--space-s);
+    inline-size: fit-content;
+    margin-inline: auto;
+  }
+
+  .btn-scrolly-rail--previous {
+    margin-inline-start: var(--control-margin-offset);
+  }
+
+  .btn-scrolly-rail--next {
+    --x-offset-direction: -1;
+    margin-inline-end: var(--control-margin-offset);
+  }
+}
