@@ -1,6 +1,6 @@
 # scrolly-rail
 
-A horizontal snap scroller custom element in two parts:
+A custom element horizontal snap scroller in two parts:
 
 1. Foundational CSS for layout, scroll, and snap styles.
 2. Web Component script adds the ability to scroll previous or next set of items into view by connecting to `button` control elements.
