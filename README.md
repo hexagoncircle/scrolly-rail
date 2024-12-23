@@ -5,9 +5,15 @@ A custom element horizontal snap scroller in two parts:
 1. Foundational CSS for layout, scroll, and snap styles.
 2. Custom element script adds the ability to scroll previous or next set of items into view by connecting to `button` control elements.
 
-Check out the [demo on CodePen](https://codepen.io/hexagoncircle/full/yyBMGrL) or run the demo locally with `npm start`.
+## Resources
+
+- Read the [blog post](https://ryanmulligan.dev/blog/scrolly-rail/)
+- Check out the [demo on CodePen](https://codepen.io/hexagoncircle/full/yyBMGrL)
+- Run the demo locally with `npm start`.
 
 🚧 This is an opinionated experimental concept exploring horizontal scroll patterns with control enhancements.
+
+## Introduction
 
 - Base styles from `scrolly-rail.css` establish the horizontal scrolling and layout of this component and its children. If JavaScript were disabled, the rail can still be scrolled and snap items into place as expected.
   - Set `scroll-snap-align: start` on the appropriate snap target. In the demo examples, this is declared on the list item (`<li>`).
@@ -19,13 +25,13 @@ Check out the [demo on CodePen](https://codepen.io/hexagoncircle/full/yyBMGrL) o
 ## Usage
 
 - Import or copy the `scrolly-rail.css` default styles into your project.
-- Include the `scrolly-rail.js` in your HTML template.
+- Include the `scrolly-rail.js` in your HTML template (only necessary if wiring up buttons to the component).
 
 ```html
 <script type="module" src="scrolly-rail.js"></script>
 ```
 
-Add a custom element with a collection of items, ideally a `ul` or `ol` element containing `li` elements.
+Add a custom element with a collection of items.
 
 ```html
 <scrolly-rail data-control-previous="btn-previous" data-control-next="btn-next">
