@@ -86,7 +86,7 @@
     height: var(--_size);
   }
 
-  /* Custom scrolly-rail styles */
+  /* Custom component styles */
   scrolly-rail {
     --_block-gutter: var(--space-m);
     --_inline-gutter: var(--space-l);
@@ -239,8 +239,13 @@ main {
   padding-block: var(--space-xl) var(--space-m);
 }
 
+.collection-list {
+  display: flex;
+}
+
 .collection-list > li {
   display: grid;
+  scroll-snap-align: start;
 }
 
 #collection-1 {

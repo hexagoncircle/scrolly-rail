@@ -10,6 +10,7 @@ Check out the [demo on CodePen](https://codepen.io/hexagoncircle/full/yyBMGrL) o
 🚧 This is an opinionated experimental concept exploring horizontal scroll patterns with control enhancements.
 
 - Base styles from `scrolly-rail.css` establish the horizontal scrolling and layout of this component and its children. If JavaScript were disabled, the rail can still be scrolled and snap items into place as expected.
+  - Set `scroll-snap-align: start` on the appropriate snap target. In the demo examples, this is declared on the list item (`<li>`).
 - The `scrolly-rail.js` script provides enhancements to the custom element if previous/next `button` control elements have been created and targeted using the available attributes (read more below).
 - When either control is clicked, the container scrolls based on the amount of fully visible items; If the 'next' control is clicked and three items are visible, the next three items scroll into view.
 - A `resizeObserver` keeps track of the component dimensions and visible item count.
