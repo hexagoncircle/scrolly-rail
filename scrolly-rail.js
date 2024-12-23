@@ -5,11 +5,25 @@ class ScrollyRail extends HTMLElement {
     }
   }
 
-  connectedCallback() {
-    this.list = this.querySelector(":scope > *");
-    this.items = this.list.children;
+  get items() {
+    const els = [...this.children];
+    let arr;
 
-    if (!this.list || !this.items) return;
+    /**
+     * Check if direct child is a wrapper element that contains children.
+     * Otherwise, return direct children.
+     */
+    if (els.length === 1 && els[0].children.length > 0) {
+      arr = [...els[0].children];
+    } else {
+      arr = [...els];
+    }
+
+    return arr;
+  }
+
+  connectedCallback() {
+    if (!this.items) return;
 
     const slot = document.createElement("slot");
     this.attachShadow({ mode: "open" });
