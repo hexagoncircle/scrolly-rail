@@ -20,7 +20,7 @@ A custom element horizontal snap scroller in two parts:
 - The `scrolly-rail.js` script provides enhancements to the custom element if previous/next `button` control elements have been created and targeted using the available attributes (read more below).
 - When either control is clicked, the container scrolls based on the amount of fully visible items; If the 'next' control is clicked and three items are visible, the next three items scroll into view.
 - A `resizeObserver` keeps track of the component dimensions and visible item count.
-- Sentinel elements are inserted (in shadow DOM) at the inline scroll boundaries of the component. Using `IntersectionObserver`, the sentinels will toggle a `data-bound` attribute on their respective controls when a bound limit is reached.
+- If controls are added, an `IntersectionObserver` listens to the scroll bounds of the first and/or last item. This toggles a `data-bound` attribute on previous/next control elements when a bound limit is reached.
 
 ## Usage
 
