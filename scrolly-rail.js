@@ -152,7 +152,10 @@ class ScrollyRail extends HTMLElement {
       btn.toggleAttribute("data-bound", entry.target === item && entry.isIntersecting);
     };
 
-    const options = { threshold: 1 };
+    const options = {
+      root: this,
+      threshold: 1,
+    };
 
     return new IntersectionObserver(callback, options);
   }
