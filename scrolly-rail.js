@@ -67,12 +67,6 @@ class ScrollyRail extends HTMLElement {
     this.step = this.getVisibleItemCount();
   }
 
-  createSentinel() {
-    const el = document.createElement("scrolly-sentinel");
-    el.style.width = "1px";
-    return el;
-  }
-
   getBounds() {
     const { left, width } = this.getBoundingClientRect();
 
@@ -138,27 +132,29 @@ class ScrollyRail extends HTMLElement {
   }
 
   observeScrollStart() {
-    const sentinel = this.createSentinel();
-    this.shadowRoot.prepend(sentinel);
-    this.scrollStartObserver = this.setupObserver(this.prevBtn, sentinel);
-    this.scrollStartObserver.observe(sentinel);
+    const firstItem = this.items[0];
+    this.scrollStartObserver = this.setupObserver(this.prevBtn, firstItem);
+    this.scrollStartObserver.observe(firstItem);
   }
 
   observeScrollEnd() {
-    const sentinel = this.createSentinel();
-    this.shadowRoot.append(sentinel);
-    this.scrollEndObserver = this.setupObserver(this.nextBtn, sentinel);
-    this.scrollEndObserver.observe(sentinel);
+    const lastItem = this.items[this.items.length - 1];
+    this.scrollEndObserver = this.setupObserver(this.nextBtn, lastItem);
+    this.scrollEndObserver.observe(lastItem);
   }
 
   /*
-   * Sentinel elements are inserted at component scroll bounds.
-   * Toggles attribute on a control element when its respective scroll bound is reached.
+   * Observe scroll bounds of first and/or last element.
+   * Toggle attribute on a button control when its respective scroll bound is reached.
    */
-  setupObserver(el, sentinel) {
-    return new IntersectionObserver(([entry]) => {
-      el.toggleAttribute("data-bound", entry.target === sentinel && entry.isIntersecting);
-    });
+  setupObserver(btn, item) {
+    const callback = ([entry]) => {
+      btn.toggleAttribute("data-bound", entry.target === item && entry.isIntersecting);
+    };
+
+    const options = { threshold: 1 };
+
+    return new IntersectionObserver(callback, options);
   }
 }
 
