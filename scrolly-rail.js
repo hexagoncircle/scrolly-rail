@@ -68,12 +68,8 @@ class ScrollyRail extends HTMLElement {
   }
 
   getBounds() {
-    const { left, width } = this.getBoundingClientRect();
-
-    return {
-      left,
-      right: left + width,
-    };
+    const { left, right } = this.getBoundingClientRect();
+    return { left, right };
   }
 
   getVisibleItemCount() {
