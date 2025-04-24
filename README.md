@@ -37,10 +37,9 @@ Add a custom element with a collection of items.
 <scrolly-rail data-control-previous="btn-previous" data-control-next="btn-next">
   <ul>
     <li>1</li>
-    <li>1</li>
-    <!-- ... -->
-    <li>11</li>
-    <li>12</li>
+    <li>2</li>
+    <li>3</li>
+    <!-- ...and so on -->
   </ul>
 </scrolly-rail>
 
