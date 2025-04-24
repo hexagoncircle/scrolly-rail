@@ -44,7 +44,7 @@ Add a custom element with a collection of items.
 </scrolly-rail>
 
 <button id="btn-previous">Previous</button>
-<button id="btn-previous">Next</button>
+<button id="btn-next">Next</button>
 ```
 
 The following attributes target elements containing `id` values. These become the controls that scroll items into view on click.
