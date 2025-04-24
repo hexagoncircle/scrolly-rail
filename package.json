@@ -1,8 +1,12 @@
 {
-  "name": "scrolly-rail",
-  "version": "0.0.1",
+  "name": "@hexagoncircle/scrolly-rail",
+  "version": "1.0.0",
   "description": "Horizontal snap scroller styles and previous/next control enhancements",
   "main": "scrolly-rail.js",
+  "files": [
+    "scrolly-rail.js",
+    "scrolly-rail.css"
+  ],
   "scripts": {
     "start": "npx http-server -o demo.html"
   },
@@ -16,6 +20,9 @@
     "url": "https://ryanmulligan.dev/"
   },
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "bugs": {
     "url": "https://github.com/hexagoncircle/scrolly-rail/issues"
   },
