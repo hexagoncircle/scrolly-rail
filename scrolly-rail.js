@@ -25,10 +25,6 @@ class ScrollyRail extends HTMLElement {
   connectedCallback() {
     if (!this.items) return;
 
-    const slot = document.createElement("slot");
-    this.attachShadow({ mode: "open" });
-    this.shadowRoot.append(slot);
-
     this.prevBtn = document.getElementById(this.dataset.controlPrevious);
     this.nextBtn = document.getElementById(this.dataset.controlNext);
 
@@ -44,7 +40,6 @@ class ScrollyRail extends HTMLElement {
       this.nextBtn.addEventListener("click", this.handleClickNext);
     }
 
-    this.init();
     this.resizeObserver = new ResizeObserver(() => this.init());
     this.resizeObserver.observe(this);
   }
@@ -56,6 +51,7 @@ class ScrollyRail extends HTMLElement {
       this.scrollStartObserver.disconnect();
       this.prevBtn.removeEventListener("click", this.handleClickPrevious);
     }
+
     if (this.nextBtn) {
       this.scrollEndObserver.disconnect();
       this.nextBtn.removeEventListener("click", this.handleClickNext);
@@ -69,7 +65,10 @@ class ScrollyRail extends HTMLElement {
 
   getBounds() {
     const { left, right } = this.getBoundingClientRect();
-    return { left, right };
+    return {
+      left: Math.round(left),
+      right: Math.round(right),
+    };
   }
 
   getVisibleItemCount() {
@@ -78,8 +77,8 @@ class ScrollyRail extends HTMLElement {
     for (let i = 0; i < this.items.length; i++) {
       const { left, right } = this.items[i].getBoundingClientRect();
 
-      if (right > this.bounds.right) break;
-      if (left > this.bounds.left) count++;
+      if (Math.round(right) > this.bounds.right) break;
+      if (Math.round(left) >= this.bounds.left) count++;
     }
 
     return count;
@@ -101,7 +100,7 @@ class ScrollyRail extends HTMLElement {
     for (let i = this.items.length - 1; i >= 0; i--) {
       const { left } = this.items[i].getBoundingClientRect();
 
-      if (left < this.bounds.left) {
+      if (Math.round(left) < this.bounds.left) {
         /*
          * Find the target item to align at start position.
          * Prevent the item at current index from overflowing.
@@ -120,7 +119,7 @@ class ScrollyRail extends HTMLElement {
       const item = this.items[i];
       const { right } = item.getBoundingClientRect();
 
-      if (right > this.bounds.right) {
+      if (Math.round(right) > this.bounds.right) {
         this.handleScrollIntoView(item, item.nextElementSibling);
         break;
       }
