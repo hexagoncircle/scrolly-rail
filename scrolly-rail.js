@@ -1,4 +1,6 @@
 class ScrollyRail extends HTMLElement {
+  #activeIndex = 0;
+
   static register(tag = "scrolly-rail") {
     if ("customElements" in window) {
       customElements.define(tag, this);
@@ -6,20 +8,14 @@ class ScrollyRail extends HTMLElement {
   }
 
   get items() {
-    const els = [...this.children];
-    let arr;
-
     /**
-     * Check if direct child is a wrapper element that contains children.
+     * Check if there's a single wrapper element that contains children, i.e. a <ul> element with <li> children.
      * Otherwise, return direct children.
      */
-    if (els.length === 1 && els[0].children.length > 0) {
-      arr = [...els[0].children];
-    } else {
-      arr = [...els];
+    if (this.children.length === 1 && this.children[0].children.length > 0) {
+      return [...this.children[0].children];
     }
-
-    return arr;
+    return [...this.children];
   }
 
   connectedCallback() {
