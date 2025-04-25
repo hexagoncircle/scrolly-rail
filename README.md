@@ -50,6 +50,14 @@ Here's another example using an unordered list of items:
 </scrolly-rail>
 ```
 
+Add `scroll-snap-align: start;` to each item. For example:
+
+```css
+scrolly-rail li {
+  scroll-snap-align: start;
+}
+```
+
 The main reason to use this web component is for the extra powers it gives button controls. Include the `scrolly-rail.js` in the HTML template.
 
 ```html
