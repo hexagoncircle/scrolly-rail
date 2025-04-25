@@ -26,6 +26,8 @@ A custom element horizontal snap scroller in two parts:
 
 Add the `scrolly-rail.css` stylesheet or copy those default styles into your project.
 
+### HTML
+
 Add the custom element with a collection of items:
 
 ```html
@@ -50,7 +52,9 @@ Here's another example using an unordered list of items:
 </scrolly-rail>
 ```
 
-Add `scroll-snap-align: start;` to each item. For example:
+### CSS snap alignment
+
+Optionally add a CSS rule that applies `scroll-snap-align: start;` to each item. For example:
 
 ```css
 scrolly-rail li {
@@ -58,13 +62,15 @@ scrolly-rail li {
 }
 ```
 
-The main reason to use this web component is for the extra powers it gives button controls. Include the `scrolly-rail.js` in the HTML template.
+### Button controls
+
+The main reason to use this web component is for the extra powers it gives to `button` control elements. Include the `scrolly-rail.js` in the HTML template.
 
 ```html
 <script type="module" src="scrolly-rail.js"></script>
 ```
 
-The following attributes target the `button` control elements with those `id` values. These controls auto-scroll elements into view on click.
+The following attributes target the control elements with the corresponding `id` values. The controls will auto-scroll items into view on click.
 
 - `data-control-previous` – Sets up element to scroll the _previous_ set of items into view.
 - `data-control-next` – Sets up element to scroll the _next_ set of items into view.
